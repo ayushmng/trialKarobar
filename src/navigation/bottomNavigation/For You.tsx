@@ -42,35 +42,31 @@ export const ForYou: React.FC<Props> = ({navigation}: Props) => {
     fetchArticle(1);
   }, [dispatch, loggedIn]);
   return (
-    <View
-      // forceInset={{top: 'always', bottom: 'always'}}
-      style={{flex: 1}}>
-      <View style={{flex: 1}}>
-        <Text
-          style={{
-            fontWeight: 'bold',
-            margin: 12,
-            fontSize: 20,
-            color: Colors.black,
-          }}>
-          News for you:
-        </Text>
-        <ArticleList
-          articleData={articleData}
-          //   loading={loading}
-          navigation={navigation}
-          //   articleNextPage={articleNextPage}
-          //   articlePageNo={articlePageNo}
-          //   articleTotalPage={articleTotalPage}
-          //   loadMoreData={loadMoreData}
-          //   refresh={refresh}
-          //   refreshArticle={refreshArticle}
-          //   ListHeaderComponent={listHeaderComponent()}
-          //   adData={homePageAds}
-          //   showAd={true}
-          //   adLoading={adLoading}
-        />
-      </View>
+    <View style={{flex: 1, backgroundColor: colors.backgroundColor}}>
+      <Text
+        style={{
+          fontWeight: 'bold',
+          margin: 12,
+          fontSize: 20,
+          color: colors.text,
+        }}>
+        News for you:
+      </Text>
+      <ArticleList
+        articleData={articleData}
+        //   loading={loading}
+        navigation={navigation}
+        //   articleNextPage={articleNextPage}
+        //   articlePageNo={articlePageNo}
+        //   articleTotalPage={articleTotalPage}
+        //   loadMoreData={loadMoreData}
+        //   refresh={refresh}
+        //   refreshArticle={refreshArticle}
+        //   ListHeaderComponent={listHeaderComponent()}
+        //   adData={homePageAds}
+        //   showAd={true}
+        //   adLoading={adLoading}
+      />
     </View>
   );
 };

@@ -27,6 +27,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import userReducer from '../../redux/user/reducer';
 import {RootState} from '../../redux/reducers';
 import {federatedSignInApi} from '../../api/auth';
+import {useTheme} from '@react-navigation/native';
 
 interface LoginFormProps {
   navigation: StackNavigationProp<any>;
@@ -37,6 +38,7 @@ interface LoginFormProps {
 
 export const LoginForm: React.FC<LoginFormProps> = ({navigation}) => {
   const dispatch = useDispatch();
+  const {colors} = useTheme();
 
   const loginHandle = (values: any) => {
     dispatch(
@@ -70,7 +72,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({navigation}) => {
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.loginScreen}>
+      <View
+        style={{
+          ...styles.loginScreen,
+          backgroundColor: colors.backgroundColor,
+        }}>
         <KarobarHeading />
 
         <View style={styles.loginScreen_authContainer}>
@@ -129,7 +135,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({navigation}) => {
 
                     <View style={styles.loginForm_forgotPasswordContainer}>
                       <TouchableNativeFeedback onPress={() => {}}>
-                        <Text style={styles.loginForm_forgotPasswordText}>
+                        <Text
+                          style={{
+                            ...styles.loginForm_forgotPasswordText,
+                            color: colors.textColor,
+                          }}>
                           Forgot Password?
                         </Text>
                       </TouchableNativeFeedback>

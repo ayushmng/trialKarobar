@@ -1,3 +1,4 @@
+import {useTheme} from '@react-navigation/native';
 import React from 'react';
 import {
   View,
@@ -24,9 +25,14 @@ const BottomAuthNav: React.FC<Props> = ({
   buttonTitle,
   descpStyle,
 }) => {
+  const {colors} = useTheme();
   return (
     <View style={styles.bottomAuthNav}>
-      <Text style={[styles.bottomAuthNav_description, descpStyle]}>
+      <Text
+        style={[
+          {...styles.bottomAuthNav_description, color: colors.textColor},
+          descpStyle,
+        ]}>
         {description}{' '}
       </Text>
       <TouchableNativeFeedback onPress={onNav}>

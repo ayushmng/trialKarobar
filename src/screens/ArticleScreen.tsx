@@ -68,6 +68,7 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({
       contentContainerStyle={{
         paddingBottom: 180,
         flexGrow: 1,
+        backgroundColor: colors.backgroundColor,
       }}>
       {/* {[...Array(5)].map((item, index) => (
         <View
@@ -97,25 +98,27 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({
           }}
         />
       </View>
-      <HTML
-        source={{
-          html: eachArticle?.content,
-        }}
-        contentWidth={contentWidth}
-        defaultTextProps={{}}
-        baseFontStyle={{
-          color: colors.text,
-          fontSize: fontSize,
-          fontFamily:
-            eachArticle?.lang === 'np'
-              ? 'KarobarDaily'
-              : Platform.OS === 'android'
-              ? 'ProximaNovaRegular'
-              : 'Proxima Nova',
-        }}
-        // {...htmlProps}
-        // ignoredStyles={['width']}
-      />
+      <View style={{margin: 8}}>
+        <HTML
+          source={{
+            html: eachArticle?.content,
+          }}
+          contentWidth={contentWidth}
+          defaultTextProps={{}}
+          baseFontStyle={{
+            color: colors.text,
+            fontSize: fontSize,
+            fontFamily:
+              eachArticle?.lang === 'np'
+                ? 'KarobarDaily'
+                : Platform.OS === 'android'
+                ? 'ProximaNovaRegular'
+                : 'Proxima Nova',
+          }}
+          // {...htmlProps}
+          // ignoredStyles={['width']}
+        />
+      </View>
     </ScrollView>
     // </View>
   );

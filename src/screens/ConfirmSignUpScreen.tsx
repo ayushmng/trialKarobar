@@ -17,6 +17,7 @@ import {confirmSignUp, resendVerificationCode} from '../redux/auth/action';
 import {RootState} from '../redux/reducers';
 import AuthRedButton from '../components/loginComponents/AuthRedButton';
 import Colors from '../constants/Colors';
+import {useTheme} from '@react-navigation/native';
 
 interface Props {
   route: any;
@@ -33,6 +34,7 @@ export const VerificationScreen: React.FC<Props> = (props) => {
   );
   // const [code, setCode] = useState<string>('');
   const dispatch = useDispatch();
+  const {colors} = useTheme();
 
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
@@ -115,9 +117,14 @@ export const VerificationScreen: React.FC<Props> = (props) => {
   }, [resendButtonDisabledTime]);
 
   return (
-    <SafeAreaView style={styles.root}>
-      <Text style={styles.title}>Verify the Authorization Code</Text>
-      <Text style={styles.subTitle}>Please check your email id</Text>
+    <SafeAreaView
+      style={{...styles.root, backgroundColor: colors.backgroundColor}}>
+      <Text style={{...styles.title, color: colors.textColor}}>
+        Verify the Authorization Code
+      </Text>
+      <Text style={{...styles.subTitle, color: colors.textColor}}>
+        Please check your email id
+      </Text>
       <CodeField
         ref={ref}
         {...props}
@@ -125,7 +132,7 @@ export const VerificationScreen: React.FC<Props> = (props) => {
         onChangeText={setValue}
         // onChangeText={setValue}
         cellCount={CELL_COUNT}
-        rootStyle={styles.codeFieldRoot}
+        rootStyle={{...styles.codeFieldRoot}}
         keyboardType="number-pad"
         textContentType="oneTimeCode"
         renderCell={({index, symbol, isFocused}) => (
@@ -133,7 +140,7 @@ export const VerificationScreen: React.FC<Props> = (props) => {
             onLayout={getCellOnLayoutHandler(index)}
             key={index}
             style={[styles.cellRoot, isFocused && styles.focusCell]}>
-            <Text style={styles.cellText}>
+            <Text style={{...styles.cellText, color: colors.textColor}}>
               {symbol || (isFocused ? <Cursor /> : null)}
             </Text>
           </View>
@@ -141,14 +148,14 @@ export const VerificationScreen: React.FC<Props> = (props) => {
       />
       {/* View for resend otp  */}
       {resendButtonDisabledTime > 0 ? (
-        <Text style={styles.resendCodeText}>
+        <Text style={{...styles.resendCodeText, color: colors.textColor}}>
           Resend Authorization Code in {resendButtonDisabledTime} sec
         </Text>
       ) : (
         <TouchableOpacity onPress={onResendOtpButtonPress}>
           <View style={styles.resendCodeContainer}>
             <Text style={styles.resendCode}> Resend Authorization Code</Text>
-            <Text style={{marginTop: 40}}>
+            <Text style={{marginTop: 40, color: colors.textColor}}>
               {' '}
               in {resendButtonDisabledTime} sec
             </Text>

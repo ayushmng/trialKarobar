@@ -89,11 +89,9 @@ export const AppNavigation = () => {
             let iconName;
 
             if (route.name === 'For You') {
-              // if (route.name === 'For You') {
               iconName = 'home';
             } else if (route.name === 'News') {
               return <Entypo name={'news'} size={size} color={color} />;
-              // iconName = 'widgets';
             } else if (route.name === 'Widget') {
               iconName = 'widgets';
             } else if (route.name === 'Profile') {

@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import {useTheme} from '@react-navigation/native';
 
 dayjs.extend(relativeTime);
 interface ArticleHomeCardProps {
@@ -38,6 +39,7 @@ export function HomeCard({
       _id: _id,
     });
   };
+  const {colors} = useTheme();
   return (
     <View style={styles.articleCard}>
       <Pressable onPress={() => (onPress ? onPress() : articleScreen())}>
@@ -80,9 +82,17 @@ export function HomeCard({
                 </DefaultText>
               </View>
               {bookmarked ? (
-                <Ionicons name="md-bookmark" size={24} />
+                <Ionicons
+                  name="md-bookmark"
+                  size={24}
+                  color={colors.iconColor}
+                />
               ) : (
-                <Ionicons name="md-bookmark-outline" size={24} />
+                <Ionicons
+                  name="md-bookmark-outline"
+                  size={24}
+                  color={colors.iconColor}
+                />
               )}
             </View>
             {/* {articleData?.lang === 'np' ? (

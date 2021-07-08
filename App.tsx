@@ -39,7 +39,7 @@ const defaultTheme = {
     headerColor: 'white',
     iconColor: 'black',
     tabIcon: Colors.RED,
-    textColor: 'black',
+    textColor: Colors.Off_Black,
     backgroundColor: Colors.Background,
   },
 };

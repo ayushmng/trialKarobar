@@ -44,7 +44,7 @@ export const News: React.FC<NewsProps> = ({navigation}) => {
       style={{
         flex: 1,
         justifyContent: 'center',
-        marginBottom: 40,
+        backgroundColor: colors.backgroundColor,
       }}>
       <View style={styles.categoryNewsScreen_topBar}>
         <FlatList

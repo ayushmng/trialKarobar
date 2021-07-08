@@ -55,33 +55,35 @@ export const CategoryArticleComponent: React.FC<CategoryArticleComponentProps> =
     // };
     return (
       <View style={{flexGrow: 1}}>
-        <ArticleList
-          // ListHeaderComponent={listHeaderComponent ? listHeaderComponent : null}
-          articleData={categoryArticle}
-          navigation={navigation}
-          // articleNextPage={categoryNextPageNo}
-          // articlePageNo={categoryArticlePageNo}
-          // articleTotalPage={categoryArticleTotalPage}
-          // loadMoreData={loadMoreData}
-          // loading={loading}
-          // adData={categoryAds}
-          // showAd={true}
-          // adLoading={adLoading}
-        />
-        {error &&
-        categoryArticle &&
-        categoryArticle.length === 0 &&
-        loading === false ? (
-          <View style={{flex: 100, justifyContent: 'center'}}>
-            <Text>error</Text>
-            <TouchableWithoutFeedback
-              onPress={() => fetchCategorizedArticle(1)}>
-              <Text>try again</Text>
-            </TouchableWithoutFeedback>
-          </View>
-        ) : (
-          <></>
-        )}
+        <View style={{marginBottom: 40}}>
+          <ArticleList
+            // ListHeaderComponent={listHeaderComponent ? listHeaderComponent : null}
+            articleData={categoryArticle}
+            navigation={navigation}
+            // articleNextPage={categoryNextPageNo}
+            // articlePageNo={categoryArticlePageNo}
+            // articleTotalPage={categoryArticleTotalPage}
+            // loadMoreData={loadMoreData}
+            // loading={loading}
+            // adData={categoryAds}
+            // showAd={true}
+            // adLoading={adLoading}
+          />
+          {error &&
+          categoryArticle &&
+          categoryArticle.length === 0 &&
+          loading === false ? (
+            <View style={{flex: 100, justifyContent: 'center'}}>
+              <Text>error</Text>
+              <TouchableWithoutFeedback
+                onPress={() => fetchCategorizedArticle(1)}>
+                <Text>try again</Text>
+              </TouchableWithoutFeedback>
+            </View>
+          ) : (
+            <></>
+          )}
+        </View>
       </View>
     );
   };

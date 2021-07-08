@@ -12,6 +12,7 @@ import Colors from '../../constants/Colors';
 import Feather from 'react-native-vector-icons/Feather';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/reducers';
+import { useTheme } from '@react-navigation/native';
 
 interface Props {
   field: string;
@@ -47,10 +48,11 @@ const InputField: React.FC<Props> = ({
   const updateSecureTextEntry = (): void => {
     setSecureTextEntry(!secureTextEntry);
   };
+  const {colors} = useTheme();
   return (
     <View style={styles.inputField}>
       {!!fieldHeading && (
-        <Text style={[styles.text_heading, {color: Colors.Off_Black}]}>
+        <Text style={[styles.text_heading, {color: colors.textColor}]}>
           {fieldHeading}
         </Text>
       )}
@@ -67,7 +69,7 @@ const InputField: React.FC<Props> = ({
         <TextInput
           style={[
             styles.textInput,
-            {color: Colors.Off_Black},
+            {color: colors.textColor},
             Platform.OS === 'ios' ? {fontWeight: 'bold'} : {},
           ]}
           value={values}
