@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Text,
+  Platform,
   Animated,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -42,18 +43,19 @@ const {width, height} = Dimensions.get('window');
 function OnBoardingScreen({setBoardingScreen}: OnBoardingScreenProps) {
   const [completed, setCompleted] = useState<boolean>();
   const scrollX = new Animated.Value(0);
-  // const navigation = useNavigation();
+  const [pageNumber, setPageNumber] = useState<any>();
 
   useEffect(() => {
     scrollX.addListener(({value}) => {
-      if (Math.floor(value / width) === onBoardings.length - 1) {
+      setPageNumber(Math.round(value / width));
+      if (pageNumber === onBoardings.length - 1) {
         setCompleted(true);
       } else {
         setCompleted(false);
       }
     });
     return () => scrollX.removeListener();
-  }, [scrollX]);
+  }, [pageNumber, scrollX]);
 
   function renderContent() {
     return (
@@ -119,8 +121,11 @@ function OnBoardingScreen({setBoardingScreen}: OnBoardingScreenProps) {
               marginRight: 16,
             }}
             onPress={() => {
-              AsyncStorage.setItem('onboarding', 'done');
-              setBoardingScreen();
+              // swipe();
+              if (pageNumber === 2) {
+                AsyncStorage.setItem('onboarding', 'done');
+                setBoardingScreen();
+              }
             }}>
             <Text style={styles.buttonText}>
               {completed === true ? 'Finish' : 'Next'}
@@ -129,6 +134,35 @@ function OnBoardingScreen({setBoardingScreen}: OnBoardingScreenProps) {
         </ScrollView>
       </SafeAreaView>
     );
+  }
+
+  function swipe() {
+    // Ignore if already scrolling or if there is less than 2 slides
+    if (this.internals.isScrolling || this.state.total < 2) {
+      return;
+    }
+
+    const state = this.state,
+      diff = this.state.index + 1,
+      x = diff * state.width,
+      y = 0;
+
+    // Call scrollTo on scrollView component to perform the swipe
+    this.scrollView && this.scrollView.scrollTo({x, y, animated: true});
+
+    // Update internal scroll state
+    this.internals.isScrolling = true;
+
+    // Trigger onScrollEnd manually on android
+    if (Platform.OS === 'android') {
+      setImmediate(() => {
+        this.onScrollEnd({
+          nativeEvent: {
+            position: diff,
+          },
+        });
+      });
+    }
   }
 
   function renderDots() {

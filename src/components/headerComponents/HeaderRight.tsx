@@ -1,23 +1,28 @@
 import React, {useState} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
+// import {RootState} from '../../redux/reducers';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 // import {useDispatch, useSelector} from 'react-redux';
+// import {changeUserLanguage} from '../../redux/user/action';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {DefaultText} from '../Text/DefaultText';
-// import Colors from '../../constants/Colors';
+import Colors from '../../constants/Colors';
+import {useTheme} from '@react-navigation/native';
 
 interface HeaderRightProps {
   navigation: StackNavigationProp<any>;
 }
 
 export function HeaderRight({navigation}: HeaderRightProps) {
+  const {colors} = useTheme();
   // const language = useSelector(
   //   (state: RootState) => state.userReducer.language,
   // );
+  const [language, setLanguage] = useState<string>();
   // const openLanguageModal = useSelector(
   //   (state: RootState) => state.dataReducer.openLanguageModal,
   // );
@@ -34,21 +39,19 @@ export function HeaderRight({navigation}: HeaderRightProps) {
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          // onPress={() => dispatch(changeUserLanguage('np'))}
-        >
+          onPress={() => setLanguage('np')}>
+          {/* onPress={() => dispatch(changeUserLanguage('np'))}> */}
           <View
             style={[
               styles.languageButton,
               {
-                backgroundColor: '#B30000',
-                // backgroundColor: language === 'np' ? '#B30000' : 'transparent',
+                backgroundColor: language === 'np' ? '#B30000' : 'transparent',
               },
             ]}>
             <DefaultText
               style={{
                 fontWeight: 'bold',
-                color: 'white',
-                // color: language === 'np' ? 'white' : Colors.GREY_4,
+                color: language === 'np' ? 'white' : Colors.GREY_4,
               }}>
               NEP
             </DefaultText>
@@ -61,19 +64,19 @@ export function HeaderRight({navigation}: HeaderRightProps) {
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          // onPress={() => dispatch(changeUserLanguage('en'))}
-        >
+          // onPress={() => dispatch(changeUserLanguage('en'))}>
+          onPress={() => setLanguage('en')}>
           <View
             style={[
               styles.languageButton,
               {
-                backgroundColor: '#B30000',
+                backgroundColor: language === 'np' ? 'transparent' : '#B30000',
               },
             ]}>
             <DefaultText
               style={{
                 fontWeight: 'bold',
-                color: 'white',
+                color: language === 'np' ? Colors.GREY_4 : 'white',
               }}>
               ENG
             </DefaultText>
@@ -83,7 +86,8 @@ export function HeaderRight({navigation}: HeaderRightProps) {
       <MaterialIcons
         name="search"
         size={28}
-        style={{color: 'black'}}
+        style={{color: colors.iconColor}}
+        // style={{color: theme === 'dark' ? Colors.GREY_4 : 'black'}}
         // onPress={() => navigation.navigate('Search')}
       />
     </View>
