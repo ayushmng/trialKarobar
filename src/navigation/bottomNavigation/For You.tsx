@@ -17,7 +17,7 @@ import {
   refreshGetAllArticle,
   setRefreshFalse,
 } from '../../redux/article/action';
-import Colors from '../../constants/Colors';
+import {WidgetCard} from '../../components/profileComponents/WidgetCard';
 
 export const ForYou: React.FC<Props> = ({navigation}: Props) => {
   const {colors} = useTheme();
@@ -40,13 +40,24 @@ export const ForYou: React.FC<Props> = ({navigation}: Props) => {
   useEffect(() => {
     dispatch(getFeaturedArticle({language: 'en'}));
     fetchArticle(1);
-  }, [dispatch, loggedIn]);
+  }, [dispatch, 'en', loggedIn]);
   return (
     <View style={{flex: 1, backgroundColor: colors.backgroundColor}}>
       <Text
         style={{
           fontWeight: 'bold',
           margin: 12,
+          fontSize: 20,
+          color: colors.text,
+        }}>
+        Widget:
+      </Text>
+      <WidgetCard />
+      <Text
+        style={{
+          fontWeight: 'bold',
+          marginLeft: 12,
+          marginBottom: 12,
           fontSize: 20,
           color: colors.text,
         }}>

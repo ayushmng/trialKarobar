@@ -10,7 +10,9 @@ import {ArticleList} from '../components/articleComponents/ArticleList';
 import {RootState} from '../redux/reducers';
 import {StackNavigationProp} from '@react-navigation/stack';
 // import {DefaultText} from '../Text/DefaultText';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import Colors from '../constants/Colors';
 // import {getCategoryAds, getHomePageAds} from '../../redux/smartAd/action';
 
 interface CategoryArticleComponentProps {
@@ -54,36 +56,34 @@ export const CategoryArticleComponent: React.FC<CategoryArticleComponentProps> =
     //   fetchCategorizedArticle(categoryNextPageNo);
     // };
     return (
-      <View style={{flexGrow: 1}}>
-        <View style={{marginBottom: 40}}>
-          <ArticleList
-            // ListHeaderComponent={listHeaderComponent ? listHeaderComponent : null}
-            articleData={categoryArticle}
-            navigation={navigation}
-            // articleNextPage={categoryNextPageNo}
-            // articlePageNo={categoryArticlePageNo}
-            // articleTotalPage={categoryArticleTotalPage}
-            // loadMoreData={loadMoreData}
-            // loading={loading}
-            // adData={categoryAds}
-            // showAd={true}
-            // adLoading={adLoading}
-          />
-          {error &&
-          categoryArticle &&
-          categoryArticle.length === 0 &&
-          loading === false ? (
-            <View style={{flex: 100, justifyContent: 'center'}}>
-              <Text>error</Text>
-              <TouchableWithoutFeedback
-                onPress={() => fetchCategorizedArticle(1)}>
-                <Text>try again</Text>
-              </TouchableWithoutFeedback>
-            </View>
-          ) : (
-            <></>
-          )}
-        </View>
-      </View>
+      <SafeAreaView style={{height: '92%', marginTop: 4}} edges={['bottom']}>
+        <ArticleList
+          // ListHeaderComponent={listHeaderComponent ? listHeaderComponent : null}
+          articleData={categoryArticle}
+          navigation={navigation}
+          // articleNextPage={categoryNextPageNo}
+          // articlePageNo={categoryArticlePageNo}
+          // articleTotalPage={categoryArticleTotalPage}
+          // loadMoreData={loadMoreData}
+          // loading={loading}
+          // adData={categoryAds}
+          // showAd={true}
+          // adLoading={adLoading}
+        />
+        {error &&
+        categoryArticle &&
+        categoryArticle.length === 0 &&
+        loading === false ? (
+          <View style={{flex: 100, justifyContent: 'center'}}>
+            <Text>error</Text>
+            <TouchableWithoutFeedback
+              onPress={() => fetchCategorizedArticle(1)}>
+              <Text>try again</Text>
+            </TouchableWithoutFeedback>
+          </View>
+        ) : (
+          <></>
+        )}
+      </SafeAreaView>
     );
   };

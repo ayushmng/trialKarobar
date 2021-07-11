@@ -12,7 +12,7 @@ import Colors from '../../constants/Colors';
 import Feather from 'react-native-vector-icons/Feather';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/reducers';
-import { useTheme } from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 
 interface Props {
   field: string;

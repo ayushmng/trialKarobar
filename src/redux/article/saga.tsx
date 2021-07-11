@@ -44,16 +44,17 @@ function* handleGetAllArticle({
     if (page === 1) {
       yield put(clearAllArticle());
     }
-    const data = yield call(() =>
-      loggedIn
-        ? getAllArticleAuthApi({page, language})
-        : getAllArticleApi({page, language}),
+    const data = yield call(
+      () => getAllArticleApi({page, language}),
+      // loggedIn
+      //   ? getAllArticleAuthApi({page, language})
+      //   : getAllArticleApi({page, language}),
     );
 
     yield put(getAllArticleSuccess(data));
     console.log(data);
   } catch (error) {
-    console.log('error get all artilce', error);
+    console.log('error get all article', error);
 
     yield put(getAllArticleFailed(error));
   }

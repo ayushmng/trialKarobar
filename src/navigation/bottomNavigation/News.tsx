@@ -13,6 +13,7 @@ import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 import {getAllCategory, setCategory} from '../../redux/categoryarticle/action';
 import {RootState} from '../../redux/reducers';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {CategoryArticleComponent} from '../../screens/CategoryArticleComponent';
 import Colors from '../../constants/Colors';
 
@@ -40,7 +41,7 @@ export const News: React.FC<NewsProps> = ({navigation}) => {
   console.log('Category Data: ', categoryData);
   console.log('Category: ', category);
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         justifyContent: 'center',
@@ -93,14 +94,13 @@ export const News: React.FC<NewsProps> = ({navigation}) => {
         />
       </View>
       <CategoryArticleComponent navigation={navigation} category={category} />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   categoryNewsScreen_topBar: {
     maxHeight: 80,
-    // paddingTop: 10,
     width: '100%',
   },
   categoryNewsScreen_categoryBoxContainer: {
@@ -118,5 +118,4 @@ const styles = StyleSheet.create({
   categoryNewsScreen_categoryText: {
     fontSize: 14,
   },
-  categoryNewsScreen_categoryArticle: {flex: 1, marginTop: 20},
 });

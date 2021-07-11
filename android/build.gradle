@@ -30,6 +30,11 @@ allprojects {
             url("$rootDir/../node_modules/jsc-android/dist")
         }
 
+        configurations {
+            cleanedAnnotations
+            compile.exclude group: 'org.jetbrains' , module:'annotations'
+        }
+
         google()
         jcenter()
         maven { url 'https://www.jitpack.io' }
