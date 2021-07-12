@@ -8,28 +8,49 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {USER_KEY} from '../../redux/auth/constant';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSelector} from 'react-redux';
+import {profileStyles} from '../../components/profileComponents/CardBox';
+import {WidgetCard} from '../../components/profileComponents/WidgetCard';
 
 export const Widget = () => {
   const {colors} = useTheme();
-  const [username, setusername] = useState<string>();
-  useEffect(() => {
-    AsyncStorage.getItem(USER_KEY).then((val) => {
-      setusername(val);
-    });
-  });
   return (
     <View
       style={{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         backgroundColor: colors.backgroundColor,
       }}>
-      <Text style={{color: colors.textColor}}>This is Widget</Text>
-      <Text style={{color: colors.textColor}}>Logged id: {username}</Text>
+      <Text
+        style={{
+          ...profileStyles.textBold,
+          color: colors.textColor,
+          padding: 8,
+          margin: 8,
+        }}>
+        Widget 1
+      </Text>
+      <WidgetCard />
+      <Text
+        style={{
+          ...profileStyles.textBold,
+          color: colors.textColor,
+          padding: 8,
+          margin: 8,
+        }}>
+        Widget 2
+      </Text>
+      <WidgetCard />
+      <Text
+        style={{
+          ...profileStyles.textBold,
+          color: colors.textColor,
+          padding: 8,
+          margin: 8,
+        }}>
+        Widget 3
+      </Text>
+      <WidgetCard />
     </View>
   );
 };

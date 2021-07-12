@@ -22,7 +22,7 @@ import {FederatedLogin} from '../loginComponents/FederatedLogin';
 import InputField from '../loginComponents/InputField';
 import {StackNavigationProp} from '@react-navigation/stack';
 import Colors from '../../constants/Colors';
-import {USER_KEY} from '../../redux/auth/constant';
+import {USER_KEY, UNAME_KEY} from '../../redux/auth/constant';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import userReducer from '../../redux/user/reducer';
 import {RootState} from '../../redux/reducers';
@@ -53,10 +53,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({navigation}) => {
   const {loginState} = useSelector((state: any) => state?.authReducer);
   const {userObj} = useSelector((state: RootState) => state?.authReducer);
   let uname = '';
+  let myUname = '';
   let username = loginState?.user?.email;
+  let user = loginState?.user?.name;
+  let federatedUser = userObj?.signInUserSession?.idToken?.payload?.name;
   let federatedUname = userObj?.signInUserSession?.idToken?.payload?.email;
-  console.log('Username :', username);
+  console.log('Email :', username);
   console.log('FederatedUname :', federatedUname);
+  console.log('FederatedUser :', federatedUser);
 
   if (federatedUname === undefined) {
     uname = username;
@@ -65,7 +69,15 @@ export const LoginForm: React.FC<LoginFormProps> = ({navigation}) => {
   } else if (username === undefined && federatedSignInApi === undefined) {
     uname = 'N/A';
   }
+  if (federatedUser === undefined) {
+    myUname = user;
+  } else if (user === undefined) {
+    myUname = federatedUser;
+  } else if (username === undefined && federatedSignInApi === undefined) {
+    myUname = 'N/A';
+  }
   AsyncStorage.setItem(USER_KEY, uname);
+  AsyncStorage.setItem(UNAME_KEY, myUname);
 
   const signupScreen = () => {
     navigation.replace('Signup');

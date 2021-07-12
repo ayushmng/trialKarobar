@@ -5,15 +5,15 @@ import {MyButton} from '../../components/authComponents/myButton';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {useNavigation, useTheme} from '@react-navigation/native';
-// import {LoginForm} from '../../components/loginComponents/loginform';
 import {LoginForm} from '../../components/loginComponents/loginform';
-import {USER_KEY} from '../../redux/auth/constant';
+import {USER_KEY, UNAME_KEY} from '../../redux/auth/constant';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
 import {RootState} from '../../redux/reducers';
 import {changeTheme} from '../../redux/user/action';
 import {setUser, signOut} from '../../redux/auth/action';
+import {ProfileHeader} from '../../components/headerComponents/ProfileHeader';
 
 const width = Colors.windowWidth - 64;
 
@@ -37,91 +37,93 @@ export const Profile = () => {
   }
   const navigation = useNavigation();
   return (
-    <View
-      style={{
-        ...profileStyles.container,
-        backgroundColor: colors.backgroundColor,
-      }}>
-      <View style={profileStyles.headingContainer}>
-        <Text
-          style={{
-            ...profileStyles.textBold,
-            color: colors.textColor,
-          }}>
-          Settings
-        </Text>
-      </View>
+    <View style={{flex: 1, backgroundColor: colors.backgroundColor}}>
+      {loggedIn && <ProfileHeader />}
       <ScrollView>
-        <View>
-          <CardBox
-            title="Theme"
-            themeToggle={() => dispatch(changeTheme())}
-            setIcon={true}
-            // isEnable
-          />
-          <CardBox
-            title="Push Notification"
-            // toggleSwitch={() => toggleSwitch()}
-            setIcon={false}
-          />
-          <CardBox
-            title="Video AutoPlay"
-            // toggleSwitch={() => toggleSwitch()}
-            setIcon={false}
-          />
-          <CardBox title="Language" setIcon={false} />
-          {!loggedIn && (
-            <MyButton
-              title={'Log In'}
-              handleSubmit={() => {
-                navigation.navigate('LoginForm');
-              }}
-              style={{marginTop: 68, zInex: 10}}
+        <View
+          style={{
+            ...profileStyles.container,
+          }}>
+          <View style={profileStyles.headingContainer}>
+            <Text
+              style={{
+                ...profileStyles.textBold,
+                color: colors.textColor,
+              }}>
+              Settings
+            </Text>
+          </View>
+          <View>
+            <CardBox
+              title="Theme"
+              themeToggle={() => dispatch(changeTheme())}
+              setIcon={true}
+              // isEnable
             />
-          )}
-
-          {loggedIn && (
-            <MyButton
-              title={'Log Out'}
-              handleSubmit={() => {
-                dispatch(signOut());
-              }}
-              style={{marginTop: 68, zInex: 10}}
+            <CardBox
+              title="Push Notification"
+              // toggleSwitch={() => toggleSwitch()}
+              setIcon={false}
             />
-          )}
+            <CardBox
+              title="Video AutoPlay"
+              // toggleSwitch={() => toggleSwitch()}
+              setIcon={false}
+            />
+            <CardBox title="Language" setIcon={false} />
+            {!loggedIn && (
+              <MyButton
+                title={'Log In'}
+                handleSubmit={() => {
+                  navigation.navigate('LoginForm');
+                }}
+                style={{marginTop: 68, zInex: 10}}
+              />
+            )}
 
-          <View style={profileStyles.footer}>
-            <Text style={{color: colors.textColor}}> Follow us on</Text>
-            <View style={profileStyles.footerLogoContainer}>
-              <Pressable onPress={() => {}}>
-                <MaterialCommunityIcons
-                  name={'facebook'}
-                  size={22}
-                  color="#0084FF"
-                />
-              </Pressable>
-              <Pressable onPress={() => {}}>
-                <MaterialCommunityIcons
-                  name={'twitter'}
-                  color="#1DA1F2"
-                  size={22}
-                />
-              </Pressable>
-              <Pressable onPress={() => {}}>
-                <MaterialCommunityIcons
-                  name={'youtube'}
-                  color={'#FF0000'}
-                  size={22}
-                />
-              </Pressable>
-              <Pressable onPress={() => {}}>
-                <Fontisto
-                  name={'instagram'}
-                  color={'black'}
-                  size={20}
-                  style={{backgroundColor: 'white'}}
-                />
-              </Pressable>
+            {loggedIn && (
+              <MyButton
+                title={'Log Out'}
+                handleSubmit={() => {
+                  dispatch(signOut());
+                }}
+                style={{marginTop: 68, zInex: 10}}
+              />
+            )}
+
+            <View style={profileStyles.footer}>
+              <Text style={{color: colors.textColor}}> Follow us on</Text>
+              <View style={profileStyles.footerLogoContainer}>
+                <Pressable onPress={() => {}}>
+                  <MaterialCommunityIcons
+                    name={'facebook'}
+                    size={22}
+                    color="#0084FF"
+                  />
+                </Pressable>
+                <Pressable onPress={() => {}}>
+                  <MaterialCommunityIcons
+                    name={'twitter'}
+                    color="#1DA1F2"
+                    size={22}
+                  />
+                </Pressable>
+                <Pressable onPress={() => {}}>
+                  <MaterialCommunityIcons
+                    name={'youtube'}
+                    color={'#FF0000'}
+                    size={22}
+                  />
+                </Pressable>
+                <Pressable onPress={() => {}}>
+                  <Fontisto
+                    name={'instagram'}
+                    color={'black'}
+                    size={20}
+                    style={{backgroundColor: 'white'}}
+                  />
+                </Pressable>
+              </View>
             </View>
           </View>
         </View>

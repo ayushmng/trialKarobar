@@ -20,3 +20,4 @@ export const SET_UP_USER = 'SET_UP_USER';
 export const GET_USER_PROFILE_FAILED = 'GET_USER_PROFILE_FAILED';
 
 export const USER_KEY = 'user_key';
+export const UNAME_KEY = 'uname_key';

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {StyleSheet, View, Text, Switch} from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
 import {useSelector} from 'react-redux';
 import {Card} from 'react-native-paper';
 import Colors from '../../constants/Colors';
@@ -14,6 +13,7 @@ interface CardBoxProps {}
 export function WidgetCard({}: CardBoxProps) {
   const [currentDate, setCurrentDate] = useState('');
   const [currentNepDate, setCurrentNepDate] = useState('');
+  const [salutation, setSalutation] = useState('');
 
   useEffect(() => {
     var engMonth = [
@@ -34,6 +34,19 @@ export function WidgetCard({}: CardBoxProps) {
     var date = new Date().getDate(); //Current Date
     var month = engMonth[new Date().getMonth()];
     var year = new Date().getFullYear(); //Current Year
+    var hour = new Date().getHours();
+
+    if (hour > 4 && hour < 12) {
+      setSalutation('Good Morning !!');
+    } else if (hour > 11 && hour < 17) {
+      setSalutation('Good Afternoon !!');
+    } else if (hour > 17 && hour < 20) {
+      setSalutation('Good Evening !!');
+    } else {
+      setSalutation('Good Night !!');
+    }
+
+    console.log('Salutation: ', salutation);
 
     let date1 = new NepaliDate(new Date(year, new Date().getMonth(), date));
     const nepDate = date1.format('ddd, DD MMMM YYYY');
@@ -43,7 +56,7 @@ export function WidgetCard({}: CardBoxProps) {
   }, []);
   return (
     <Card style={widgetStyles.cardStyle}>
-      <Text style={{...widgetStyles.SalutationText}}>Good Evening!</Text>
+      <Text style={{...widgetStyles.SalutationText}}>{salutation}</Text>
       <Text style={{...widgetStyles.NepaliTextBold}}>{currentNepDate}</Text>
       <Text style={{...widgetStyles.EngTextBold}}>{currentDate}</Text>
     </Card>
