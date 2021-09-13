@@ -88,7 +88,7 @@ export function HeaderRight({navigation}: HeaderRightProps) {
         size={28}
         style={{color: colors.iconColor}}
         // style={{color: theme === 'dark' ? Colors.GREY_4 : 'black'}}
-        // onPress={() => navigation.navigate('Search')}
+        onPress={() => navigation.navigate('SearchScreen')}
       />
     </View>
   );

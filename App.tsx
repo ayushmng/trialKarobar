@@ -25,10 +25,14 @@ const darkTheme = {
   colors: {
     ...DarkTheme.colors,
     headerColor: '#404040',
-    iconColor: 'white',
+    profileHeader: Colors.DarkBottomNavBackground,
+    iconColor: Colors.GREY_2,
     tabIcon: 'white',
-    textColor: 'white',
+    textColor: Colors.GREY_1,
     backgroundColor: Colors.DarkBackground,
+    tabBackground: Colors.DarkBottomNavBackground,
+    bottomSheetView: Colors.DarkBackground,
+    topBarCategory: Colors.DarkBackground,
   },
 };
 
@@ -37,10 +41,14 @@ const defaultTheme = {
   colors: {
     ...DefaultTheme.colors,
     headerColor: 'white',
+    profileHeader: Colors.WHITE,
     iconColor: 'black',
     tabIcon: Colors.RED,
     textColor: Colors.Off_Black,
     backgroundColor: Colors.Background,
+    tabBackground: Colors.WHITE,
+    bottomSheetView: Colors.WHITE,
+    topBarCategory: Colors.GREY_1,
   },
 };
 

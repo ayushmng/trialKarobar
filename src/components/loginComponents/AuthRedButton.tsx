@@ -8,10 +8,10 @@ import {
   GestureResponderEvent,
   Platform,
 } from 'react-native';
-// import {useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
 import LinearGradient from 'react-native-linear-gradient';
-// import {RootState} from '../../redux/reducers';
+import {RootState} from '../../redux/reducers';
 // import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 // import {ActivityIndicator} from 'react-native-paper';
 
@@ -34,7 +34,7 @@ const AuthRedButton: React.FC<Props> = ({
   style,
   externalLoading,
 }) => {
-  // const loading = useSelector((state: RootState) => state.authReducer.loading);
+  const loading = useSelector((state: RootState) => state.authReducer.loading);
 
   return (
     <LinearGradient
@@ -46,15 +46,14 @@ const AuthRedButton: React.FC<Props> = ({
       <TouchableNativeFeedback
         onPress={handleSubmit}
         style={{width: '100%', height: '100%'}}
-        // disabled={loading ? true : false}
-      >
+        disabled={loading ? true : false}>
         <View style={{flex: 1}}>
           <View style={styles.authbutton_container}>
-            {/* {loading || externalLoading ? (
+            {loading || externalLoading ? (
               <ActivityIndicator size="small" color="blue" />
-            ) : ( */}
-            <Text style={[styles.authbutton_text, textStyle]}>{title}</Text>
-            {/* )} */}
+            ) : (
+              <Text style={[styles.authbutton_text, textStyle]}>{title}</Text>
+            )}
           </View>
         </View>
       </TouchableNativeFeedback>

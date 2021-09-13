@@ -114,7 +114,7 @@ function* handleSignIn({
     alertBox(error.code, error.message);
     if (error.code === 'UserNotConfirmedException') {
       yield put(getUserName({userName: email}));
-      yield navigation.replace('ConfirmSignUp', {email: email});
+      // yield navigation.replace('ConfirmSignUp', {email: email});
     } else {
       yield put(signInFailed(error));
     }

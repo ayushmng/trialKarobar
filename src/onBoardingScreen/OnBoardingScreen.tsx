@@ -18,6 +18,7 @@ import OnBoardingNews from '../assets/OnBoardingNews.svg';
 import OnBoardingStories from '../assets/OnBoardingStories.svg';
 import OnBoardingWidget from '../assets/OnBoardingWidget.svg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useRef} from 'react';
 // import {useNavigation} from '@react-navigation/native';
 
 interface OnBoardingScreenProps {
@@ -57,6 +58,12 @@ function OnBoardingScreen({setBoardingScreen}: OnBoardingScreenProps) {
     return () => scrollX.removeListener();
   }, [pageNumber, scrollX]);
 
+  const scrollRef = useRef(null);
+  const [scrollEvent, setScrollEvent] = useState({
+    scrolling: 0,
+    width: Colors.windowWidth,
+  });
+
   function renderContent() {
     return (
       <SafeAreaView>
@@ -82,10 +89,25 @@ function OnBoardingScreen({setBoardingScreen}: OnBoardingScreenProps) {
             scrollEventThrottle={16}
             showsHorizontalScrollIndicator={false}
             snapToAlignment="center"
+            ref={scrollRef}
             onScroll={Animated.event(
               [{nativeEvent: {contentOffset: {x: scrollX}}}],
-              {useNativeDriver: false},
-            )}>
+              {
+                useNativeDriver: false,
+              },
+            )}
+            // onScroll={(item) => {
+            //   // console.log('Scrolling: ', item.nativeEvent.contentOffset.x);
+            //   // console.log('Width: ', item.nativeEvent.layoutMeasurement.width);
+            //   Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}], {
+            //     useNativeDriver: false,
+            //   });
+            //   setScrollEvent({
+            //     scrolling: item.nativeEvent.contentOffset.x,
+            //     width: item.nativeEvent.layoutMeasurement.width,
+            //   });
+            // }}
+          >
             {onBoardings.map((item, index) => (
               <View
                 key={index}
@@ -122,47 +144,24 @@ function OnBoardingScreen({setBoardingScreen}: OnBoardingScreenProps) {
             }}
             onPress={() => {
               // swipe();
+              // console.log('PageNumber: ', pageNumber);
               if (pageNumber === 2) {
                 AsyncStorage.setItem('onboarding', 'done');
                 setBoardingScreen();
+              } else {
+                scrollRef.current.scrollTo({
+                  x: scrollEvent.scrolling + scrollEvent.width,
+                  animated: true,
+                });
               }
             }}>
             <Text style={styles.buttonText}>
-              {completed === true ? 'Finish' : 'Next'}
+              {completed ? 'Finish' : 'Next'}
             </Text>
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
     );
-  }
-
-  function swipe() {
-    // Ignore if already scrolling or if there is less than 2 slides
-    if (this.internals.isScrolling || this.state.total < 2) {
-      return;
-    }
-
-    const state = this.state,
-      diff = this.state.index + 1,
-      x = diff * state.width,
-      y = 0;
-
-    // Call scrollTo on scrollView component to perform the swipe
-    this.scrollView && this.scrollView.scrollTo({x, y, animated: true});
-
-    // Update internal scroll state
-    this.internals.isScrolling = true;
-
-    // Trigger onScrollEnd manually on android
-    if (Platform.OS === 'android') {
-      setImmediate(() => {
-        this.onScrollEnd({
-          nativeEvent: {
-            position: diff,
-          },
-        });
-      });
-    }
   }
 
   function renderDots() {

@@ -1,7 +1,7 @@
 import {all} from 'redux-saga/effects';
 import authSaga from './auth/saga';
 import articleSaga from './article/saga';
-// import searchSaga from './search/saga';
+import searchSaga from './search/saga';
 // import bookmarkSaga from './bookmark/saga';
 import categorySaga from './categoryarticle/saga';
 // import userProfileSaga from './userProfile/saga';
@@ -14,7 +14,7 @@ export default function* rootSaga() {
   yield all([
     authSaga(),
     articleSaga(),
-    // searchSaga(),
+    searchSaga(),
     // bookmarkSaga(),
     categorySaga(),
     // userProfileSaga(),

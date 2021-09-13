@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import authReducer from './auth/reducer';
 import articleReducer from './article/reducer';
-// import searchReducer from './search/reducer';
+import searchReducer from './search/reducer';
 import userReducer from './user/reducer';
 // import bookmarkReducer from './bookmark/reducer';
 import categoryReducer from './categoryarticle/reducer';
@@ -15,7 +15,7 @@ import dataReducer from './data/reducer';
 export const reducers = combineReducers({
   authReducer,
   articleReducer,
-  //   searchReducer,
+  searchReducer,
   userReducer,
   //   userProfileReducer,
   //   bookmarkReducer,

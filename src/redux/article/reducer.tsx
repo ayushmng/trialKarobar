@@ -55,9 +55,6 @@ export default function articleReducer(
 ): InitialState {
   console.log('Action Type: ', action.type);
   switch (action.type) {
-    case GET_ALL_ARTICAL: {
-      return {...state, loadingAllArticle: true, errorAllArticle: ''};
-    }
     case CLEAR_ALL_ARTICLE: {
       return {
         ...state,
@@ -66,6 +63,9 @@ export default function articleReducer(
         article: [],
         articleNextPageNo: 1,
       };
+    }
+    case GET_ALL_ARTICAL: {
+      return {...state, loadingAllArticle: true, errorAllArticle: ''};
     }
     case GET_ALL_ARTICAL_SUCCESS: {
       let stateData = !!state.article ? [...state.article] : [];

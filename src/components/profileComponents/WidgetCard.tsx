@@ -40,13 +40,11 @@ export function WidgetCard({}: CardBoxProps) {
       setSalutation('Good Morning !!');
     } else if (hour > 11 && hour < 17) {
       setSalutation('Good Afternoon !!');
-    } else if (hour > 17 && hour < 20) {
+    } else if (hour > 16 && hour < 20) {
       setSalutation('Good Evening !!');
     } else {
       setSalutation('Good Night !!');
     }
-
-    console.log('Salutation: ', salutation);
 
     let date1 = new NepaliDate(new Date(year, new Date().getMonth(), date));
     const nepDate = date1.format('ddd, DD MMMM YYYY');
@@ -71,6 +69,11 @@ export const widgetStyles = StyleSheet.create({
     marginLeft: 24,
     marginRight: 24,
     marginBottom: 16,
+    elevation: 4,
+    shadowRadius: 8,
+    shadowOpacity: 0.5,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
     backgroundColor: Colors.BLUE,
   },
   NepaliTextBold: {

@@ -27,11 +27,12 @@ export const MyButton: React.FC<MyButtonProps> = ({
     <View style={style}>
       <TouchableOpacity
         style={{
-          position: 'absolute',
+          // position: 'absolute',
           bottom: 0,
           right: 0,
           backgroundColor: Colors.RED,
-          width: Colors.windowWidth - 48,
+          width: '100%',
+          // width: Colors.windowWidth - 48,
           height: 48,
           alignItems: 'center',
           justifyContent: 'center',

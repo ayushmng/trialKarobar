@@ -28,6 +28,9 @@ export const ForYou: React.FC<Props> = ({navigation}: Props) => {
   const loggedIn = useSelector(
     (state: RootState) => state.authReducer.loggedIn,
   );
+  const loading = useSelector(
+    (state: RootState) => state.articleReducer.loadingAllArticle,
+  );
   const fetchArticle = (pageNo: number) => {
     dispatch(
       getAllArticle({
@@ -65,7 +68,7 @@ export const ForYou: React.FC<Props> = ({navigation}: Props) => {
       </Text>
       <ArticleList
         articleData={articleData}
-        //   loading={loading}
+        loading={loading}
         navigation={navigation}
         //   articleNextPage={articleNextPage}
         //   articlePageNo={articlePageNo}

@@ -27,7 +27,7 @@ const configureAmplify = (): void => {
           region: config.apiGateway.REGION,
           custom_header: async () => {
             const session = await Auth.currentSession();
-            console.log('object', session.getIdToken().getJwtToken());
+            console.log('JwtToken: ', session.getIdToken().getJwtToken());
             return {
               Authorization: session.getIdToken().getJwtToken(),
             };

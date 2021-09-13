@@ -25,6 +25,7 @@ import {Hub} from 'aws-amplify';
 import {State} from 'react-native-gesture-handler';
 import {ForYou} from './bottomNavigation/For You';
 import {ArticleScreen} from '../screens/ArticleScreen';
+import {SearchScreen} from '../screens/SearchScreen';
 
 export const AppNavigation = () => {
   const dispatch = useDispatch();
@@ -177,6 +178,15 @@ export const AppNavigation = () => {
           options={({navigation, route}: any) => ({
             headerShown: true,
             title: 'Article',
+            headerTitle: () => null,
+          })}
+        />
+        <Stack.Screen
+          name="SearchScreen"
+          component={SearchScreen}
+          options={({navigation, route}: any) => ({
+            headerShown: false,
+            title: 'SearchScreen',
             headerTitle: () => null,
           })}
         />

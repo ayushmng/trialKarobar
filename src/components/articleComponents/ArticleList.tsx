@@ -24,7 +24,7 @@ interface ArticleListProps {
   //   articleTotalPage?: number;
   //   articlePageNo: number;
   //   articleNextPage?: number;
-  // loading?: boolean;
+  loading?: boolean;
   //   loadMoreData: () => void;
   navigation: StackNavigationProp<any>;
   //   refresh?: boolean;
@@ -43,7 +43,7 @@ export const ArticleList: React.FC<ArticleListProps> = ({
   //   articleTotalPage,
   //   articlePageNo,
   //   articleNextPage,
-  //   loading,
+  loading,
   //   loadMoreData,
   //   refresh,
   //   refreshArticle,
@@ -79,8 +79,8 @@ export const ArticleList: React.FC<ArticleListProps> = ({
   //   };
 
   const renderItem = ({item, index}: any) => {
-    return articleData.length === 0 ? (
-      // return articleData.length === 0 && loading ? (
+    // return articleData.length === 0 ? (
+    return articleData.length === 0 && loading ? (
       // showloading while fetching data for the first time and articleData length is zero.
       <LoadingIndicator />
     ) : articleData.length === 0 ? (
@@ -150,9 +150,9 @@ export const ArticleList: React.FC<ArticleListProps> = ({
       //     onEndReached();
       //   }}
       //   onEndReachedThreshold={0.1}
-      //   ListFooterComponent={(): any => {
-      //     return loading && <LoadingIndicator />;
-      //   }}
+      ListFooterComponent={(): any => {
+        return loading && <LoadingIndicator />;
+      }}
     />
   );
 };

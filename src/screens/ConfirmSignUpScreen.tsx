@@ -157,7 +157,7 @@ export const VerificationScreen: React.FC<Props> = (props) => {
             <Text style={styles.resendCode}> Resend Authorization Code</Text>
             <Text style={{marginTop: 40, color: colors.textColor}}>
               {' '}
-              in {resendButtonDisabledTime} sec
+              in {resendButtonDisabledTime} se
             </Text>
           </View>
         </TouchableOpacity>
@@ -167,7 +167,7 @@ export const VerificationScreen: React.FC<Props> = (props) => {
         title="Verify"
         handleSubmit={authHandler}
         style={{marginTop: 42}}
-        externalLoading={true}
+        // externalLoading={true}
       />
     </SafeAreaView>
   );

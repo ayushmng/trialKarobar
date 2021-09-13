@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
-// import {RootState} from '../../redux/reducers';
+import {RootState} from '../../redux/reducers';
 // import {ActivityIndicator} from 'react-native-paper';
 
 interface Props {
@@ -30,21 +30,20 @@ const AuthGreyButton: React.FC<Props> = ({
   textStyle,
   style,
 }) => {
-  //   const loading = useSelector((state: RootState) => state.authReducer.loading);
+  const loading = useSelector((state: RootState) => state.authReducer.loading);
 
   return (
     <View style={{...styles.authbutton, ...style}}>
       <View style={{flex: 1}}>
         <TouchableNativeFeedback
           onPress={handleSubmit}
-          //   disabled={loading ? true : false}
-        >
+          disabled={loading ? true : false}>
           <View style={styles.authbutton_container}>
-            {/* {loading ? (
+            {loading ? (
               <ActivityIndicator size="small" color="blue" />
-            ) : ( */}
-            <Text style={[styles.authbutton_text, textStyle]}>{title}</Text>
-            {/* )} */}
+            ) : (
+              <Text style={[styles.authbutton_text, textStyle]}>{title}</Text>
+            )}
           </View>
         </TouchableNativeFeedback>
       </View>
